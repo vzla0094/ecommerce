@@ -1,10 +1,14 @@
 import { createStore, applyMiddleware } from "redux";
+import { persistStore } from "redux-persist";
+
 import logger from "redux-logger"; //middleware which help us debug
 
-import rootReducer from "./root-reducer";
+import rootReducer from "./root-reducer"; //this is actually persistReducer(persistConfig, rootReducer), that's what was exported as default
 
 const middlewares = [logger];
 
-const store = createStore(rootReducer, applyMiddleware(...middlewares));
+export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
-export default store;
+export const persistor = persistStore(store);
+
+export default { store, persistor };
