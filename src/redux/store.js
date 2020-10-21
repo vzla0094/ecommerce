@@ -2,12 +2,13 @@ import { createStore, applyMiddleware } from "redux";
 import { persistStore } from "redux-persist";
 
 import logger from "redux-logger"; //middleware which help us debug
+import thunk from "redux-thunk";
 
 import rootReducer from "./root-reducer"; //this is actually persistReducer(persistConfig, rootReducer), that's what was exported as default
 
-const middlewares = [];
+const middlewares = [thunk];
 
-if(process.env.NODE_ENV === 'development'){
+if (process.env.NODE_ENV === "development") {
   middlewares.push(logger);
 }
 
